@@ -1,3 +1,3 @@
 public enum BookStatus {
-    AVAILABLE, LOANED;
+    DISPONIBLE, PRESTADO;
 }
