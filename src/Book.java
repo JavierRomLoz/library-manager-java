@@ -44,6 +44,6 @@ public class Book {
     //toString METHOD
     @Override
     public String toString(){
-        return ("Título: " + title + " " +"Autor: " + author+ " " + "Editorial: " + publisher + " " + "Estado: " + bookStatus);
+        return ("Título: " + title + " " +"Autor: " + author + " " + "Editorial: " + publisher + " " + "Estado: " + bookStatus);
     }
 }
