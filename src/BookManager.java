@@ -102,7 +102,7 @@ public class BookManager {
                 System.out.println("No existe ese libro en la base de datos.");
                 System.out.print("Prueba de nuevo: \n  > ");
                 removeBook = sc.nextLine();
-            }
+                }
             if(books.get(i).getTitle().equalsIgnoreCase(removeBook)){
                 findBook = true;
                 System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?: ");
@@ -118,7 +118,8 @@ public class BookManager {
                 }
                 break;
             }
-            }if(!findBook) {
+            }
+            if(!findBook) {
             System.out.println("Ese libro no está en la lista.");
         }
     }
