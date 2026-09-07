@@ -47,7 +47,7 @@ public class BookManager {
     public void edit(){
         knownBookMethod();
         //EDIT BOOK
-        System.out.print("Introduce el título del libro quieres editar: \n  > ");
+        System.out.print("Introduce el título del libro quieres editar o pulsa 'Intro' para salir: \n  > ");
         String titleName = sc.nextLine();
         boolean findBook = false;
 
@@ -57,9 +57,13 @@ public class BookManager {
 
         for(int i = 0; i < books.size(); i++){
             while(!books.get(i).getTitle().equalsIgnoreCase(titleName)){
+                if (titleName.isEmpty()){
+                    return;
+                }
                 System.out.println("No existe ese libro en la base de datos.");
                 System.out.print("Prueba de nuevo: \n  > ");
                 titleName = sc.nextLine();
+
             }
             if(books.get(i).getTitle().equalsIgnoreCase(titleName)) {
                 findBook = true;
@@ -95,10 +99,14 @@ public class BookManager {
     public void remove(){
         knownBookMethod();
         boolean findBook = false;
-        System.out.print("Introduce el título del libro que quieres borrar: \n  > ");
+        System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para salir: \n  > ");
         String removeBook = sc.nextLine();
         for(int i = 0; i < books.size(); i++){
+
             while(!books.get(i).getTitle().equalsIgnoreCase(removeBook)){
+                if (removeBook.isEmpty()){
+                    return;
+                }
                 System.out.println("No existe ese libro en la base de datos.");
                 System.out.print("Prueba de nuevo: \n  > ");
                 removeBook = sc.nextLine();
