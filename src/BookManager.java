@@ -47,89 +47,69 @@ public class BookManager {
     public void edit(){
         knownBookMethod();
         //EDIT BOOK
-        System.out.print("Introduce el título del libro quieres editar o pulsa 'Intro' para salir: \n  > ");
-        String titleName = sc.nextLine();
+        String titleName;
         boolean findBook = false;
-
 
         //¿¿Y SI HAY DOS LIBROS CON EL MISMO NOMBRE??
 
+        do{
+            System.out.print("Introduce el título del libro quieres editar o pulsa 'Intro' para salir: \n  > ");
+            titleName = sc.nextLine();
+            for(int i = 0; i < books.size(); i++){
+                if(books.get(i).getTitle().equalsIgnoreCase(titleName)) {
+                    findBook = true;
+                    System.out.println("A continuación podrás cambiar el Titulo, Autor, Editorial y Estado del libro. Si no deseas cambiar algún concepto, pulsa Intro y pasarás al siguiente.");
+                    System.out.print("  > Título: ");
+                    String newTitle = sc.nextLine();
+                    books.get(i).setTitle(newTitle);
 
-        for(int i = 0; i < books.size(); i++){
-            while(!books.get(i).getTitle().equalsIgnoreCase(titleName)){
-                if (titleName.isEmpty()){
-                    return;
-                }
-                System.out.println("No existe ese libro en la base de datos.");
-                System.out.print("Prueba de nuevo: \n  > ");
-                titleName = sc.nextLine();
+                    System.out.print("  > Autor: ");
+                    String newAuthor = sc.nextLine();
+                    books.get(i).setAuthor(newAuthor);
 
-            }
-            if(books.get(i).getTitle().equalsIgnoreCase(titleName)) {
-                findBook = true;
-                System.out.println("A continuación podrás cambiar el Titulo, Autor, Editorial y Estado del libro. Si no deseas cambiar algún concepto, pulsa Intro y pasarás al siguiente.");
-                System.out.print("  > Título: ");
-                String newTitle = sc.nextLine();
-                books.get(i).setTitle(newTitle);
+                    System.out.print("  > Editorial: ");
+                    String newPublisher = sc.nextLine();
+                    books.get(i).setPublisher(newPublisher);
 
-                System.out.print("  > Autor: ");
-                String newAuthor = sc.nextLine();
-                books.get(i).setAuthor(newAuthor);
-
-                System.out.print("  > Editorial: ");
-                String newPublisher = sc.nextLine();
-                books.get(i).setPublisher(newPublisher);
-
-                System.out.print("  > Estado (Disponible/Prestado): ");
-                String newStatus = sc.nextLine().toUpperCase();
-                while (!newStatus.equalsIgnoreCase("Disponible") && !newStatus.equalsIgnoreCase("Prestado")) {
-                    System.out.println("Recuerda que solo puede estar Disponible o Prestado.");
                     System.out.print("  > Estado (Disponible/Prestado): ");
-                    newStatus = sc.nextLine().toUpperCase();
+                    String newStatus = sc.nextLine().toUpperCase();
+                    while (!newStatus.equalsIgnoreCase("Disponible") && !newStatus.equalsIgnoreCase("Prestado")) {
+                        System.out.println("Recuerda que solo puede estar Disponible o Prestado.");
+                        System.out.print("  > Estado (Disponible/Prestado): ");
+                        newStatus = sc.nextLine().toUpperCase();
+                    }
+                    BookStatus status = BookStatus.valueOf(newStatus);
+                    books.get(i).setBookStatus(status);
+                    break;
                 }
-                BookStatus status = BookStatus.valueOf(newStatus);
-                books.get(i).setBookStatus(status);
-            }break;
-        }if(!findBook) {
-                System.out.println("No existe ese libro en la base de datos.");
-        }
+            }
+        }while(!findBook && !titleName.isEmpty());
     }
 
     //REMOVE BOOK
     public void remove(){
         knownBookMethod();
         boolean findBook = false;
-        System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para salir: \n  > ");
-        String removeBook = sc.nextLine();
-        for(int i = 0; i < books.size(); i++){
-
-            while(!books.get(i).getTitle().equalsIgnoreCase(removeBook)){
-                if (removeBook.isEmpty()){
-                    return;
+        String removeBook;
+        do{
+            System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para salir: \n  > ");
+            removeBook = sc.nextLine();
+            for(int i = 0; i < books.size(); i++){
+                if(books.get(i).getTitle().equalsIgnoreCase(removeBook)){
+                    findBook = true;
+                    System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?: ");
+                    String confirmation = sc.nextLine();
+                    while(!confirmation.equalsIgnoreCase("si") && !confirmation.equalsIgnoreCase("no")) {
+                        System.out.print("Recuerda escribir 'Si' o 'No' para continuar. \n  > ");
+                        confirmation = sc.nextLine();
+                    }if (confirmation.equalsIgnoreCase("si")){
+                        books.remove(i);
+                        System.out.println("Libro eliminado.");
+                    }else {
+                        System.out.println("El libro no se eliminó.");
+                    }break;
                 }
-                System.out.println("No existe ese libro en la base de datos.");
-                System.out.print("Prueba de nuevo: \n  > ");
-                removeBook = sc.nextLine();
-                }
-            if(books.get(i).getTitle().equalsIgnoreCase(removeBook)){
-                findBook = true;
-                System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?: ");
-                String confirmation = sc.nextLine();
-                while(!confirmation.equalsIgnoreCase("si") && !confirmation.equalsIgnoreCase("no")) {
-                    System.out.print("Recuerda escribir 'Si' o 'No' para continuar. \n  > ");
-                    confirmation = sc.nextLine();
-                }if (confirmation.equalsIgnoreCase("si")){
-                    books.remove(i);
-                    System.out.println("Libro eliminado.");
-                }else {
-                    System.out.println("El libro no se eliminó.");
-                }
-                break;
             }
-            }
-            if(!findBook) {
-            System.out.println("Ese libro no está en la lista.");
-        }
+        }while(!findBook && !removeBook.isEmpty());
     }
-
 }
