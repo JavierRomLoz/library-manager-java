@@ -30,11 +30,11 @@ public class BookManager {
 
     //KNOWNBOOK METHOD
     public void knownBookMethod(){
-        System.out.print("¿Quieres ver el listado para conocer el titulo exacto del libro (Si/No)?: ");
+        System.out.print("¿Quieres ver el listado para conocer el titulo exacto del libro (Si/No)?:\n  > ");
         String knownBook = sc.nextLine();
         while(!knownBook.equalsIgnoreCase("si") && !knownBook.equalsIgnoreCase("no")){
             System.out.println("Recuerda escribir 'Si' o 'No' para continuar. ");
-            System.out.print("¿Quieres ver el listado para conocer el título exacto del libro (Si/No)?: ");
+            System.out.print("¿Quieres ver el listado para conocer el título exacto del libro (Si/No)?:\n  > ");
             knownBook = sc.nextLine();
         }
         if(knownBook.equalsIgnoreCase("si")){
@@ -97,7 +97,7 @@ public class BookManager {
             for(int i = 0; i < books.size(); i++){
                 if(books.get(i).getTitle().equalsIgnoreCase(removeBook)){
                     findBook = true;
-                    System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?: ");
+                    System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?:\n  > ");
                     String confirmation = sc.nextLine();
                     while(!confirmation.equalsIgnoreCase("si") && !confirmation.equalsIgnoreCase("no")) {
                         System.out.print("Recuerda escribir 'Si' o 'No' para continuar. \n  > ");
