@@ -61,15 +61,21 @@ public class BookManager {
                     System.out.println("A continuación podrás cambiar el Titulo, Autor, Editorial y Estado del libro. Si no deseas cambiar algún concepto, pulsa Intro y pasarás al siguiente.");
                     System.out.print("  > Título: ");
                     String newTitle = sc.nextLine();
-                    books.get(i).setTitle(newTitle);
+                    if(!newTitle.isEmpty()){
+                        books.get(i).setTitle(newTitle);
+                    }
 
                     System.out.print("  > Autor: ");
                     String newAuthor = sc.nextLine();
-                    books.get(i).setAuthor(newAuthor);
+                    if(!newAuthor.isEmpty()){
+                        books.get(i).setAuthor(newAuthor);
+                    }
 
                     System.out.print("  > Editorial: ");
                     String newPublisher = sc.nextLine();
-                    books.get(i).setPublisher(newPublisher);
+                    if(!newPublisher.isEmpty()){
+                        books.get(i).setPublisher(newPublisher);
+                    }
 
                     System.out.print("  > Estado (Disponible/Prestado): ");
                     String newStatus = sc.nextLine().toUpperCase();
@@ -82,6 +88,8 @@ public class BookManager {
                     books.get(i).setBookStatus(status);
                     break;
                 }
+            }if(!findBook){
+                System.out.println("No se encontró.");
             }
         }while(!findBook && !titleName.isEmpty());
     }
