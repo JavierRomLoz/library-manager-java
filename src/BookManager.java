@@ -99,16 +99,16 @@ public class BookManager {
         }while(!findBook && !titleName.isEmpty());
     }
 
-    //REMOVE BOOK
-    public void remove(){
+    //DELETE BOOK
+    public void delete(){
         knownBookMethod();
         boolean findBook = false;
-        String removeBook;
+        String deleteBook;
         do{
             System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para salir: \n  > ");
-            removeBook = sc.nextLine();
+            deleteBook = sc.nextLine();
             for(int i = 0; i < books.size(); i++){
-                if(books.get(i).getTitle().equalsIgnoreCase(removeBook)){
+                if(books.get(i).getTitle().equalsIgnoreCase(deleteBook)){
                     findBook = true;
                     System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?:\n  > ");
                     String confirmation = sc.nextLine();
@@ -123,6 +123,6 @@ public class BookManager {
                     }break;
                 }
             }
-        }while(!findBook && !removeBook.isEmpty());
+        }while(!findBook && !deleteBook.isEmpty());
     }
 }
