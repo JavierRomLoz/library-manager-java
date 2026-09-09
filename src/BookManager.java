@@ -14,7 +14,7 @@ public class BookManager {
 
     //CREATE BOOK METHOD
     public void create(String title, String author, String publisher){
-        Book book = new Book(title, author, publisher, BookStatus.DISPONIBLE);
+        Book book = new Book(title, author, publisher, BookStatus.AVAILABLE);
         books.add(book);
     }
 
@@ -83,6 +83,11 @@ public class BookManager {
                         System.out.println("Recuerda que solo puede estar Disponible o Prestado.");
                         System.out.print("  > Estado (Disponible/Prestado): ");
                         newStatus = sc.nextLine().toUpperCase();
+                    }
+                    if(newStatus.equals("DISPONIBLE")){
+                        newStatus = "AVAILABLE";
+                    }else {
+                        newStatus = "LOANED";
                     }
                     BookStatus status = BookStatus.valueOf(newStatus);
                     books.get(i).setBookStatus(status);
