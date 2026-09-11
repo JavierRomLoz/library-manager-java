@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class BookManager {
     private List<Book> books = new ArrayList<>();
     private Scanner sc;
+    private int idBook = 0;
 
     //CONSTRUCTOR
     public BookManager(Scanner sc){
@@ -14,17 +15,19 @@ public class BookManager {
 
     //CREATE BOOK METHOD
     public void create(String title, String author, String publisher){
-        Book book = new Book(title, author, publisher, BookStatus.AVAILABLE);
+        idBook ++;
+        Book book = new Book(title, author, publisher, BookStatus.AVAILABLE, idBook);
         books.add(book);
     }
 
     //LIST BOOK METHOD
     public void list(){
         for(int i = 0; i < books.size() ; i++){
-            String titleName = books.get(i).getTitle();
-            BookStatus bookStatus = books.get(i).getBookStatus();
-            System.out.println((i+1) + ". " + titleName + " " +"Estado: " + bookStatus);
-            //System.out.println(books);
+            System.out.println(books.get(i));
+
+            //String titleName = books.get(i).getTitle();
+            //BookStatus bookStatus = books.get(i).getBookStatus();
+            //System.out.println((i+1) + ". " + titleName + " " +"Estado: " + bookStatus);
         }
     }
 
@@ -104,25 +107,42 @@ public class BookManager {
         knownBookMethod();
         boolean findBook = false;
         String deleteBook;
+        int deleteIdBook;
+        String confirmation = "";
         do{
             System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para salir: \n  > ");
             deleteBook = sc.nextLine();
-            for(int i = 0; i < books.size(); i++){
-                if(books.get(i).getTitle().equalsIgnoreCase(deleteBook)){
+            //
+            for(int i = 0; i < books.size(); i++) {
+                if (books.get(i).getTitle().equalsIgnoreCase(deleteBook)) {
+                    System.out.println(books.get(i));
+                }
+            }
+            System.out.print("Estos son los libros que existen. Pon el 'Identificador' del libro que deseas borrar: \n  > ");
+            deleteIdBook = sc.nextInt();
+            sc.nextLine();
+            for(int i = 0; i < books.size(); i++) {
+                if (books.get(i).getIdBook() == deleteIdBook) {
+                    System.out.print("Libro seleccionado: " + books.get(i) + "\n¿Estás seguro que deseas borrarlo?:\n  > ");
+                    confirmation = sc.nextLine();
                     findBook = true;
-                    System.out.println("Libro encontrado. ¿Estás seguro que deseas borrarlo?:\n  > ");
-                    String confirmation = sc.nextLine();
                     while(!confirmation.equalsIgnoreCase("si") && !confirmation.equalsIgnoreCase("no")) {
                         System.out.print("Recuerda escribir 'Si' o 'No' para continuar. \n  > ");
                         confirmation = sc.nextLine();
-                    }if (confirmation.equalsIgnoreCase("si")){
-                        books.remove(i);
+                    }
+                    if (confirmation.equalsIgnoreCase("si")){
+                        books.remove(books.get(i));
                         System.out.println("Libro eliminado.");
                     }else {
                         System.out.println("El libro no se eliminó.");
                     }break;
                 }
-            }
-        }while(!findBook && !deleteBook.isEmpty());
+
+
+            }//okkk
+
+
+
+        }while(!deleteBook.isEmpty() && !findBook);
     }
 }
