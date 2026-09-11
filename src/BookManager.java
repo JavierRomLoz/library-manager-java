@@ -137,12 +137,7 @@ public class BookManager {
                         System.out.println("El libro no se eliminó.");
                     }break;
                 }
-
-
-            }//okkk
-
-
-
+            }
         }while(!deleteBook.isEmpty() && !findBook);
     }
 }
