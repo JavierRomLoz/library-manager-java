@@ -70,14 +70,14 @@ public class MemberManager {
     }
 
     //DELETE MEMBER
-    public void remove(){
+    public void delete(){
         boolean findMember = false;
-        String removeMember;
+        String deleteMember;
         do{
             System.out.print("Introduce el DNI del socio que quieres borrar o pulsa 'Intro' para salir: \n  > ");
-            removeMember = sc.nextLine();
+            deleteMember = sc.nextLine();
             for(int i = 0; i < members.size(); i++){
-                if(members.get(i).getDni().equalsIgnoreCase(removeMember)){
+                if(members.get(i).getDni().equalsIgnoreCase(deleteMember)){
                     findMember = true;
                     System.out.print("Socio encontrado: " + members.get(i).getFirstName() + " " + members.get(i).getLastName() + "\n¿Estás seguro que deseas borrarlo?:\n  > ");
                     String confirmation = sc.nextLine();
@@ -92,7 +92,7 @@ public class MemberManager {
                     }break;
                 }
             }
-        }while(!findMember && !removeMember.isEmpty());
+        }while(!findMember && !deleteMember.isEmpty());
     }
 
 }
