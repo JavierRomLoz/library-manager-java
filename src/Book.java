@@ -3,13 +3,15 @@ public class Book {
     private String author;
     private String publisher;
     private BookStatus bookStatus;
+    private int idBook;
 
     //CONSTRUCTOR
-    public Book(String title, String author, String publisher, BookStatus bookStatus){
+    public Book(String title, String author, String publisher, BookStatus bookStatus, int idBook){
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.bookStatus = bookStatus;
+        this.idBook = idBook;
     }
 
     //GETTERS & SETTERS
@@ -41,9 +43,16 @@ public class Book {
         this.bookStatus = bookStatus;
     }
 
+    public int getIdBook(){
+        return idBook;
+    }
+    public void setIdBook(int idBook){
+        this.idBook = idBook;
+    }
+
     //toString METHOD
     @Override
     public String toString(){
-        return ("Título: " + title + " " +"Autor: " + author + " " + "Editorial: " + publisher + " " + "Estado: " + bookStatus);
+        return ("Id: " + idBook + " - " + "Título: " + title + " " +"Autor: " + author + " " + "Editorial: " + publisher + " " + "Estado: " + bookStatus);
     }
 }
