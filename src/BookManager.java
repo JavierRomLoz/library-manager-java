@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,10 +25,6 @@ public class BookManager {
     public void list(){
         for(int i = 0; i < books.size() ; i++){
             System.out.println(books.get(i));
-
-            //String titleName = books.get(i).getTitle();
-            //BookStatus bookStatus = books.get(i).getBookStatus();
-            //System.out.println((i+1) + ". " + titleName + " " +"Estado: " + bookStatus);
         }
     }
 
@@ -58,6 +55,7 @@ public class BookManager {
         do{
             System.out.print("Introduce el título del libro quieres editar o pulsa 'Intro' para salir: \n  > ");
             titleName = sc.nextLine();
+
             for(int i = 0; i < books.size(); i++){
                 if(books.get(i).getTitle().equalsIgnoreCase(titleName)) {
                     findBook = true;
@@ -110,32 +108,50 @@ public class BookManager {
         int deleteIdBook;
         String confirmation = "";
         do{
-            System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para salir: \n  > ");
+            System.out.print("Introduce el título del libro que quieres borrar o pulsa 'Intro' para volver al menú: \n  > ");
             deleteBook = sc.nextLine();
-            //
+            if(deleteBook.isEmpty()){
+                System.out.println("Operación finalizada.");
+                break;
+            }
             for(int i = 0; i < books.size(); i++) {
-                if (books.get(i).getTitle().equalsIgnoreCase(deleteBook)) {
+                if (books.get(i).getTitle().equalsIgnoreCase(deleteBook) && !deleteBook.isEmpty()) {
                     System.out.println(books.get(i));
+                    findBook = true;
                 }
             }
-            System.out.print("Estos son los libros que existen. Pon el 'Identificador' del libro que deseas borrar: \n  > ");
-            deleteIdBook = sc.nextInt();
-            sc.nextLine();
-            for(int i = 0; i < books.size(); i++) {
-                if (books.get(i).getIdBook() == deleteIdBook) {
-                    System.out.print("Libro seleccionado: " + books.get(i) + "\n¿Estás seguro que deseas borrarlo?:\n  > ");
-                    confirmation = sc.nextLine();
-                    findBook = true;
-                    while(!confirmation.equalsIgnoreCase("si") && !confirmation.equalsIgnoreCase("no")) {
-                        System.out.print("Recuerda escribir 'Si' o 'No' para continuar. \n  > ");
-                        confirmation = sc.nextLine();
+            if(!findBook){
+                System.out.println("No existe ese libro en la base de datos.");
+            }else {
+                try{
+                    System.out.print("Estos son los libros que existen. Pon el 'Identificador' del libro que deseas borrar: \n  > ");
+                    boolean idFound = false;
+                    deleteIdBook = sc.nextInt();
+                    sc.nextLine();
+                    for(int i = 0; i < books.size(); i++) {
+                        if (books.get(i).getIdBook() == deleteIdBook) {
+                            idFound = true;
+                            System.out.print("Libro seleccionado: " + books.get(i) + "\n¿Estás seguro que deseas borrarlo?:\n  > ");
+                            confirmation = sc.nextLine();
+                            while(!confirmation.equalsIgnoreCase("si") && !confirmation.equalsIgnoreCase("no")) {
+                                System.out.print("Recuerda escribir 'Si' o 'No' para continuar. \n  > ");
+                                confirmation = sc.nextLine();
+                            }
+                            if (confirmation.equalsIgnoreCase("si")){
+                                books.remove(i);
+                                System.out.println("Libro eliminado.");
+                            }else {
+                                System.out.println("El libro no se eliminó.");
+                            }break;
+                        }
                     }
-                    if (confirmation.equalsIgnoreCase("si")){
-                        books.remove(books.get(i));
-                        System.out.println("Libro eliminado.");
-                    }else {
-                        System.out.println("El libro no se eliminó.");
-                    }break;
+                    if(!idFound) {
+                        System.out.println("Ese identificador no corresponde a ninguno de los libros mostrados.");
+                        break;
+                    }
+                }catch (InputMismatchException e){
+                    System.out.println("Error. Debes introducir el número de Identificador.");
+                    sc.nextLine();
                 }
             }
         }while(!deleteBook.isEmpty() && !findBook);
