@@ -49,55 +49,79 @@ public class BookManager {
         //EDIT BOOK
         String titleName;
         boolean findBook = false;
+        int editIdBook = 0;
 
-        //¿¿Y SI HAY DOS LIBROS CON EL MISMO NOMBRE??
-
+        //UN SOLO INTENTO DE ID, SIN REINTENTO (REVISAR PARA EDIT Y DELETE)
         do{
             System.out.print("Introduce el título del libro quieres editar o pulsa 'Intro' para salir: \n  > ");
             titleName = sc.nextLine();
-
-            for(int i = 0; i < books.size(); i++){
-                if(books.get(i).getTitle().equalsIgnoreCase(titleName)) {
-                    findBook = true;
-                    System.out.println("A continuación podrás cambiar el Titulo, Autor, Editorial y Estado del libro. Si no deseas cambiar algún concepto, pulsa Intro y pasarás al siguiente.");
-                    System.out.print("  > Título: ");
-                    String newTitle = sc.nextLine();
-                    if(!newTitle.isEmpty()){
-                        books.get(i).setTitle(newTitle);
-                    }
-
-                    System.out.print("  > Autor: ");
-                    String newAuthor = sc.nextLine();
-                    if(!newAuthor.isEmpty()){
-                        books.get(i).setAuthor(newAuthor);
-                    }
-
-                    System.out.print("  > Editorial: ");
-                    String newPublisher = sc.nextLine();
-                    if(!newPublisher.isEmpty()){
-                        books.get(i).setPublisher(newPublisher);
-                    }
-
-                    System.out.print("  > Estado (Disponible/Prestado): ");
-                    String newStatus = sc.nextLine().toUpperCase();
-                    while (!newStatus.equalsIgnoreCase("Disponible") && !newStatus.equalsIgnoreCase("Prestado")) {
-                        System.out.println("Recuerda que solo puede estar Disponible o Prestado.");
-                        System.out.print("  > Estado (Disponible/Prestado): ");
-                        newStatus = sc.nextLine().toUpperCase();
-                    }
-                    if(newStatus.equals("DISPONIBLE")){
-                        newStatus = "AVAILABLE";
-                    }else {
-                        newStatus = "LOANED";
-                    }
-                    BookStatus status = BookStatus.valueOf(newStatus);
-                    books.get(i).setBookStatus(status);
-                    break;
-                }
-            }if(!findBook){
-                System.out.println("No se encontró.");
+            if(titleName.isEmpty()){
+                System.out.println("Operación finalizada.");
+                break;
             }
-        }while(!findBook && !titleName.isEmpty());
+            for(int i = 0; i < books.size(); i++) {
+                if (books.get(i).getTitle().equalsIgnoreCase(titleName)) {
+                    System.out.println(books.get(i));
+                    findBook = true;
+                }
+            }
+            if(!findBook){
+                System.out.println("No existe ese libro en la base de datos.");
+            }else {
+                try {
+                    System.out.print("Estos son los libros que existen. Pon el 'Identificador' del libro que deseas borrar: \n  > ");
+                    boolean idFound = false;
+                    editIdBook = sc.nextInt();
+                    sc.nextLine();
+                    for(int i = 0; i < books.size(); i++){
+                        if(books.get(i).getIdBook() == editIdBook) {
+                            idFound = true;
+                            System.out.println("A continuación podrás cambiar el Titulo, Autor, Editorial y Estado del libro. Si no deseas cambiar algún concepto, pulsa Intro y pasarás al siguiente.");
+                            System.out.print("  > Título: ");
+                            String newTitle = sc.nextLine();
+                            if(!newTitle.isEmpty()){
+                                books.get(i).setTitle(newTitle);
+                            }
+
+                            System.out.print("  > Autor: ");
+                            String newAuthor = sc.nextLine();
+                            if(!newAuthor.isEmpty()){
+                                books.get(i).setAuthor(newAuthor);
+                            }
+
+                            System.out.print("  > Editorial: ");
+                            String newPublisher = sc.nextLine();
+                            if(!newPublisher.isEmpty()){
+                                books.get(i).setPublisher(newPublisher);
+                            }
+
+                            System.out.print("  > Estado (Disponible/Prestado): ");
+                            String newStatus = sc.nextLine().toUpperCase();
+                            while (!newStatus.equalsIgnoreCase("Disponible") && !newStatus.equalsIgnoreCase("Prestado")) {
+                                System.out.println("Recuerda que solo puede estar Disponible o Prestado.");
+                                System.out.print("  > Estado (Disponible/Prestado): ");
+                                newStatus = sc.nextLine().toUpperCase();
+                            }
+                            if(newStatus.equals("DISPONIBLE")){
+                                newStatus = "AVAILABLE";
+                            }else {
+                                newStatus = "LOANED";
+                            }
+                            BookStatus status = BookStatus.valueOf(newStatus);
+                            books.get(i).setBookStatus(status);
+                            break;
+                        }
+                    }
+                    if(!idFound) {
+                        System.out.println("Ese identificador no corresponde a ninguno de los libros mostrados.");
+                        break;
+                    }
+                }catch (InputMismatchException e){
+                    System.out.println("Error. Debes introducir el número de Identificador.");
+                    sc.nextLine();
+                }
+            }
+        }while(!findBook);
     }
 
     //DELETE BOOK
@@ -115,7 +139,7 @@ public class BookManager {
                 break;
             }
             for(int i = 0; i < books.size(); i++) {
-                if (books.get(i).getTitle().equalsIgnoreCase(deleteBook) && !deleteBook.isEmpty()) {
+                if (books.get(i).getTitle().equalsIgnoreCase(deleteBook)) {
                     System.out.println(books.get(i));
                     findBook = true;
                 }
@@ -154,6 +178,6 @@ public class BookManager {
                     sc.nextLine();
                 }
             }
-        }while(!deleteBook.isEmpty() && !findBook);
+        }while(!findBook);
     }
 }
