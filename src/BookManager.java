@@ -76,6 +76,7 @@ public class BookManager {
                     for(int i = 0; i < books.size(); i++){
                         if(books.get(i).getIdBook() == editIdBook) {
                             idFound = true;
+                            System.out.println("Libro seleccionado: " + books.get(i));
                             System.out.println("A continuación podrás cambiar el Titulo, Autor, Editorial y Estado del libro. Si no deseas cambiar algún concepto, pulsa Intro y pasarás al siguiente.");
                             System.out.print("  > Título: ");
                             String newTitle = sc.nextLine();
