@@ -53,6 +53,12 @@ public class Book {
     //toString METHOD
     @Override
     public String toString(){
-        return ("Id: " + idBook + " - " + "Título: " + title + " " +"Autor: " + author + " " + "Editorial: " + publisher + " " + "Estado: " + bookStatus);
+        String bookStatusSP = "";
+        if(bookStatus == BookStatus.AVAILABLE){
+            bookStatusSP = "Disponible";
+        }else {
+            bookStatusSP = "Prestado";
+        }
+        return ("Id: " + idBook + " - " + "Título: " + title + " " +"Autor: " + author + " " + "Editorial: " + publisher + " " + "Estado: " + bookStatusSP);
     }
 }
