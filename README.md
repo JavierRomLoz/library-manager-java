@@ -1,6 +1,6 @@
 # Library Manager Java 📚
 
-> 🚧 **Proyecto en desarrollo activo** — Entidades `book.Book` y `member.Member` con sus operaciones CRUD completas y funcionales. Pendiente: gestión de préstamos (`loan.Loan`) con lógica de retrasos y disponibilidad.
+> 🚧 **Proyecto en desarrollo activo** — Entidades `book.Book` y `member.Member` con sus operaciones CRUD, junto con la gestión básica de préstamos (`loan.Loan`) y devoluciones. Pendiente: persistencia y mejoras de validación.
 
 Sistema de gestión de biblioteca desarrollado en Java, aplicando Programación Orientada a Objetos (POO) con relaciones reales entre entidades (`book.Book`, `member.Member`, `loan.Loan`).
 
@@ -11,18 +11,20 @@ Proyecto de práctica para consolidar POO avanzado en Java (2º de DAM - Desarro
 ### Implementado
 - **Gestión de libros** (`book.BookManager`): crear, listar, editar y borrar, con identificador único (`idBook`) para evitar ambigüedad cuando hay varios libros con el mismo título.
 - **Gestión de socios** (`member.MemberManager`): crear, listar, editar y borrar, con número de socio autoincremental y búsqueda por DNI.
+- **Gestión de préstamos** (`loan.LoanManager`): crear préstamos vinculando libros y socios, impedir prestar libros no disponibles, registrar devoluciones y calcular días de retraso.
+- Menú principal (`main.Main`) para acceder a las operaciones de libros, socios y préstamos.
 - Validación de entradas: estado del libro restringido a valores válidos, manejo de `InputMismatchException` cuando se espera un número y se introduce texto, confirmación antes de borrar.
 
 ### En construcción
-- **Gestión de préstamos** (`loan.LoanManager`): relación entre `book.Book`, `member.Member` y `loan.Loan`, con cálculo de retraso en la devolución y actualización automática del estado de disponibilidad del libro.
-- Menú principal (`main.Main`) que integre los tres gestores.
+- Persistencia de libros, socios y préstamos: actualmente los datos solo viven mientras el programa está en ejecución.
+- Mejoras en la validación y edición de datos.
 
 ## 🛠️ Tecnologías y conceptos aplicados
 
 - **Java** (sin frameworks ni dependencias externas)
 - Programación Orientada a Objetos: relaciones entre clases (`loan.Loan` contiene objetos `book.Book` y `member.Member`, no copias de sus datos)
 - Encapsulación (atributos privados + getters/setters), constructores
-- `enum` para restringir estados a valores válidos (`book.BookStatus`, próximamente `loan.LoanStatus`)
+- `enum` para restringir estados a valores válidos (`book.BookStatus`, `loan.LoanStatus`)
 - Colecciones: `List<T>` (programando contra la interfaz, no la implementación concreta)
 - Identificadores únicos autoincrementales para evitar ambigüedad entre registros con datos duplicados
 - Manejo de excepciones: `try/catch` (`IllegalArgumentException`, `InputMismatchException`)
@@ -33,7 +35,7 @@ Proyecto de práctica para consolidar POO avanzado en Java (2º de DAM - Desarro
 ```
 library-manager-java/
 ├── src/
-│   ├── main/Main.java              # Punto de entrada (pendiente)
+│   ├── main/Main.java              # Punto de entrada y menú principal
 │   ├── book/
 │   │   ├── Book.java               # Entidad Libro
 │   │   ├── BookManager.java        # Lógica CRUD sobre la colección de libros
@@ -43,7 +45,7 @@ library-manager-java/
 │   │   └── MemberManager.java      # Lógica CRUD sobre la colección de socios
 │   └── loan/
 │       ├── Loan.java               # Entidad Préstamo
-│       ├── LoanManager.java        # Lógica de préstamos (pendiente)
+│       ├── LoanManager.java        # Lógica de préstamos y devoluciones
 │       └── LoanStatus.java         # Enum de estado del préstamo
 ├── .gitignore
 └── README.md
@@ -58,7 +60,7 @@ Este proyecto está pensado para ejecutarse desde **IntelliJ IDEA**:
    git clone https://github.com/JavierRomLoz/library-manager-java.git
    ```
 2. Abre la carpeta del proyecto con IntelliJ IDEA.
-3. Una vez esté disponible `main.Main.java`, ejecuta el programa (botón ▶️ o `Run` sobre la clase `main.Main`).
+3. Ejecuta `main.Main` (botón ▶️ o `Run` sobre la clase `main.Main`).
 
 No requiere ninguna dependencia ni librería externa: solo Java estándar (JDK).
 
@@ -71,7 +73,7 @@ No requiere ninguna dependencia ni librería externa: solo Java estándar (JDK).
 
 ## 🚀 Próximas mejoras
 
-- Completar `loan.LoanManager` con cálculo de días de retraso y penalización.
+- Añadir penalización por retraso en `loan.LoanManager`.
 - Validar las fechas con `LocalDate` en lugar de `String`.
 - Migración a base de datos con MySQL (JDBC).
 

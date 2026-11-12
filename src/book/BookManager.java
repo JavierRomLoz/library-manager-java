@@ -30,6 +30,16 @@ public class BookManager {
         }
     }
 
+    //FIND BOOK BY ID
+    public Book findById(int idBook){
+        for(int i = 0; i < books.size(); i++){
+            if(books.get(i).getIdBook() == idBook){
+                return books.get(i);
+            }
+        }
+        return null;
+    }
+
     //KNOWNBOOK METHOD
     public void knownBookMethod(){
         System.out.print("¿Quieres ver el listado para conocer el titulo exacto del libro (Si/No)?:\n  > ");

@@ -71,6 +71,16 @@ public class MemberManager {
         }
     }
 
+    //FIND MEMBER BY DNI
+    public Member findByDni(String dni){
+        for(int i = 0; i < members.size(); i++){
+            if(members.get(i).getDni().equalsIgnoreCase(dni)){
+                return members.get(i);
+            }
+        }
+        return null;
+    }
+
     //DELETE MEMBER
     public void delete(){
         boolean findMember = false;
