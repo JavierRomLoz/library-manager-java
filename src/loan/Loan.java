@@ -1,3 +1,7 @@
+package loan;
+
+import book.Book;
+
 public class Loan {
     private Book book;
     private Member member;

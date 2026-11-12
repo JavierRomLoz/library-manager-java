@@ -1,3 +1,5 @@
+package member;
+
 public class Member {
     private String firstName;
     private String lastName;
