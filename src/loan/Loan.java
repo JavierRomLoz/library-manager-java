@@ -1,6 +1,7 @@
 package loan;
 
 import book.Book;
+import member.Member;
 
 public class Loan {
     private Book book;

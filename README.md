@@ -33,14 +33,18 @@ Proyecto de práctica para consolidar POO avanzado en Java (2º de DAM - Desarro
 ```
 library-manager-java/
 ├── src/
-│   ├── main.Main.java              # Punto de entrada (pendiente)
-│   ├── book.BookManager.java       # Lógica CRUD sobre la colección de libros
-│   ├── member.MemberManager.java     # Lógica CRUD sobre la colección de socios
-│   ├── loan.LoanManager.java       # Lógica de préstamos (pendiente)
-│   ├── book.Book.java              # Entidad Libro
-│   ├── member.Member.java            # Entidad Socio
-│   ├── loan.Loan.java              # Entidad Préstamo
-│   └── book.BookStatus.java        # Enum de estado del libro
+│   ├── main/Main.java              # Punto de entrada (pendiente)
+│   ├── book/
+│   │   ├── Book.java               # Entidad Libro
+│   │   ├── BookManager.java        # Lógica CRUD sobre la colección de libros
+│   │   └── BookStatus.java         # Enum de estado del libro
+│   ├── member/
+│   │   ├── Member.java             # Entidad Socio
+│   │   └── MemberManager.java      # Lógica CRUD sobre la colección de socios
+│   └── loan/
+│       ├── Loan.java               # Entidad Préstamo
+│       ├── LoanManager.java        # Lógica de préstamos (pendiente)
+│       └── LoanStatus.java         # Enum de estado del préstamo
 ├── .gitignore
 └── README.md
 ```
