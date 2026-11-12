@@ -1,6 +1,6 @@
 # Library Manager Java 📚
 
-> 🚧 **Proyecto en desarrollo activo** — Entidades `book.Book` y `member.Member` con sus operaciones CRUD, junto con la gestión básica de préstamos (`loan.Loan`) y devoluciones. Pendiente: persistencia y mejoras de validación.
+> ✅ **Versión funcional** — El proyecto incluye el CRUD de libros y socios, además de la gestión de préstamos y devoluciones desde un menú interactivo por consola.
 
 Sistema de gestión de biblioteca desarrollado en Java, aplicando Programación Orientada a Objetos (POO) con relaciones reales entre entidades (`book.Book`, `member.Member`, `loan.Loan`).
 
@@ -14,10 +14,6 @@ Proyecto de práctica para consolidar POO avanzado en Java (2º de DAM - Desarro
 - **Gestión de préstamos** (`loan.LoanManager`): crear préstamos vinculando libros y socios, impedir prestar libros no disponibles, registrar devoluciones y calcular días de retraso.
 - Menú principal (`main.Main`) para acceder a las operaciones de libros, socios y préstamos.
 - Validación de entradas: estado del libro restringido a valores válidos, manejo de `InputMismatchException` cuando se espera un número y se introduce texto, confirmación antes de borrar.
-
-### En construcción
-- Persistencia de libros, socios y préstamos: actualmente los datos solo viven mientras el programa está en ejecución.
-- Mejoras en la validación y edición de datos.
 
 ## 🛠️ Tecnologías y conceptos aplicados
 
@@ -74,8 +70,9 @@ No requiere ninguna dependencia ni librería externa: solo Java estándar (JDK).
 ## 🚀 Próximas mejoras
 
 - Añadir penalización por retraso en `loan.LoanManager`.
-- Validar las fechas con `LocalDate` en lugar de `String`.
+- Guardar las fechas directamente como `LocalDate` en el modelo en lugar de `String`.
 - Migración a base de datos con MySQL (JDBC).
+- Persistencia de libros, socios y préstamos para conservar los datos entre ejecuciones.
 
 ## 👤 Autor
 
